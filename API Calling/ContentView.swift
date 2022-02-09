@@ -8,11 +8,28 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var games = [Game]()
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        NavigationView {
+            List (games)  { game in
+                NavigationLink(
+                    destination: Text(game.game_url)
+                        .padding(),
+                    label: {
+                        Text(game.title)
+                    })
+            }
+            .navigationTitle("Games")
+        }
     }
 }
+
+struct Game : Identifiable {
+    let id = UUID()
+    var title : String
+    var game_url : String
+}
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
